@@ -26,6 +26,10 @@ Bsweep   = c / (2* dres);               % Bandwidth
 Tchirp   = 5.5 * (2 * maxRange  / c);   % chirp time in sec
 slope    = Bsweep / Tchirp;             % Slope of the FMCW
 
+fprintf('Bandwidth :%f', Bsweep);
+fprintf('\nChirp Time:%f', Tchirp);
+fprintf('\nSlope     :%f\n', slope);
+
 %Operating carrier frequency of Radar 
 fc= 77e9;             %carrier freq in Hz
                                                           
@@ -78,7 +82,6 @@ end
 
 %reshape the vector into Nr*Nd array. Nr and Nd here would also define the size of
 %Range and Doppler FFT respectively.
-
 Mix=reshape(Mix,[Nr,Nd]);
 
 % Length of the Signal
@@ -141,7 +144,6 @@ figure,surf(doppler_axis,range_axis,RDM);
 %Slide Window through the complete Range Doppler Map
 
 %Select the number of Training Cells in both the dimensions.
-
 Tr = 10;
 Td = 8;
 
@@ -158,7 +160,6 @@ offset = 6;
 % noise level calcualtion when we slide to next cells iteratively
 CFAR = zeros(size(RDM));
 
-% *%TODO* :
 %design a loop such that it slides the CUT across range doppler map by
 %giving margins at the edges for Training and Guard Cells.
 %For every iteration sum the signal level within all the training
@@ -208,12 +209,8 @@ end
 %matrix. Hence,few cells will not be thresholded. To keep the map size same
 % set those values to 0. 
 
-% Implementer Notes: As a new CFAR array was created with Initial value as Zero this stpe is not necessary
+% Developer Notes: As a new CFAR array was created with Initial value as Zero this step is not necessary
 
 %display the CFAR output using the Surf function like we did for Range Doppler Response output.
 figure,surf(doppler_axis,range_axis,CFAR);
 colorbar;
-
-
- 
- 
